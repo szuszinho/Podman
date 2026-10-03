@@ -1,0 +1,22 @@
+[Unit]
+Description=AdGuard Home
+Wants=network-online.target
+After=network-online.target
+
+[Container]
+Image=docker.io/adguard/adguardhome:latest
+ContainerName=adguardhome
+
+Volume=/srv/adguardhome/work:/opt/adguardhome/work:Z
+Volume=/srv/adguardhome/conf:/opt/adguardhome/conf:Z
+
+PublishPort=53:53/tcp
+PublishPort=53:53/udp
+PublishPort=80:80/tcp
+PublishPort=3000:3000/tcp
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
